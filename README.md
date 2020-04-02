@@ -7,6 +7,5 @@ We will be using two different models as a means of comparison: Google's BERT an
 
 import the TensorFlow modules
 
-%tensorflow_version 2.x
 import tensorflow as tf
 print(tf.__version__)
