@@ -12,9 +12,8 @@ import tensorflow as tf
 !pip install transformers
 
 from transformers import (TFBertForSequenceClassification, 
-                          BertTokenizer,
-                          TFRobertaForSequenceClassification, 
-                          RobertaTokenizer)
+                          BertTokenizer)
 
 bert_model = TFBertForSequenceClassification.from_pretrained("bert-base-cased")
+
 bert_tokenizer = BertTokenizer.from_pretrained("bert-base-cased")
