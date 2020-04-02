@@ -1,14 +1,12 @@
 # Sequence-Classification-with-Transformers (Bert)
 
-This colab notebook will guide you through using the Transformers library to obtain state-of-the-art results on the sequence classification task. It is attached to the following tutorial.
+This article will guide you through using the Transformers library to obtain state-of-the-art results on the sequence classification task. It is attached to the following tutorial. We will be using Bert model as a means of comparison: Google's BERT.
 
-We will be using Bert model as a means of comparison: Google's BERT.
-
-Import the TensorFlow modules
+Import the TensorFlow modules:
                
     import tensorflow as tf
 
-Import the transformers
+Import the transformers:
 
     !pip install transformers
 
@@ -18,7 +16,7 @@ Import the transformers
 
     bert_tokenizer = BertTokenizer.from_pretrained("bert-base-cased")
 
-Getting the dataset
+Getting the dataset:
 
     import tensorflow_datasets
 
@@ -28,13 +26,13 @@ Getting the dataset
 
     validation_dataset = data["validation"]
 
-Encoding sequences
+Encoding sequences:
 
     encoded_bert_sequence = bert_tokenizer.encode(seq0, seq1, add_special_tokens=True, max_length=128)
 
     bert_special_tokens = [bert_tokenizer.sep_token_id, bert_tokenizer.cls_token_id]
 
-Encode_plus()
+Encode_plus():
 
     from transformers import glue_convert_examples_to_features
 
@@ -48,7 +46,11 @@ Encode_plus()
 
 The two BERT datasets are now ready to be used: the training dataset is shuffled and batch, while the validation dataset is only batched.
 
-Defining the hyper-parameters
+....................................Training the model....................................
+
+Before fine-tuning the model, we must define a few hyperparameters that will be used during the training such as the optimizer, the loss and the evaluation metric.
+
+As an optimizer we'll be using Adam, which was the optimizer used during those models' pre-training. As a loss we'll be using the sparse categorical cross-entropy, and the sparse categorical accuracy as the evaluation metric.
 
     optimizer = tf.keras.optimizers.Adam(learning_rate=3e-5, epsilon=1e-08, clipnorm=1.0)
 
@@ -58,17 +60,11 @@ Defining the hyper-parameters
 
     bert_model.compile(optimizer=optimizer, loss=loss, metrics=[metric])
 
-Training the model
-
-The beauty of tensorflow/keras lies here: using keras' fit method to fine-tune the model with a single line of code
-
-Fine-tuning BERT on MRPC
+The beauty of tensorflow/keras lies here: using keras' fit method to fine-tune the model with a single line of code 
 
         bert_history = bert_model.fit(bert_train_dataset, epochs=3, validation_data=bert_validation_dataset)
 
-Evaluating the BERT model
-
-Evaluating a model is as simple as it is to train it - using the evaluate method
+Evaluating the BERT model:
 
     bert_model.evaluate(bert_validation_dataset)
 
