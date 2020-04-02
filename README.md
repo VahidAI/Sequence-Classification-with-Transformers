@@ -18,3 +18,17 @@ from transformers import (TFBertForSequenceClassification, BertTokenizer)
 bert_model = TFBertForSequenceClassification.from_pretrained("bert-base-cased")
 
 bert_tokenizer = BertTokenizer.from_pretrained("bert-base-cased")
+
+#Getting the dataset
+
+import tensorflow_datasets
+
+data = tensorflow_datasets.load("glue/mrpc")
+
+train_dataset = data["train"]
+
+validation_dataset = data["validation"]
+
+#textBERT Tokenizer
+
+
