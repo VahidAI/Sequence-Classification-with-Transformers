@@ -4,11 +4,11 @@ This colab notebook will guide you through using the Transformers library to obt
 
 We will be using Bert model as a means of comparison: Google's BERT.
 
-#import the TensorFlow modules
+Import the TensorFlow modules
                
     import tensorflow as tf
 
-#import the transformers
+Import the transformers
 
     !pip install transformers
 
@@ -18,7 +18,7 @@ We will be using Bert model as a means of comparison: Google's BERT.
 
     bert_tokenizer = BertTokenizer.from_pretrained("bert-base-cased")
 
-#Getting the dataset
+Getting the dataset
 
     import tensorflow_datasets
 
@@ -28,13 +28,13 @@ We will be using Bert model as a means of comparison: Google's BERT.
 
     validation_dataset = data["validation"]
 
-#Encoding sequences
+Encoding sequences
 
     encoded_bert_sequence = bert_tokenizer.encode(seq0, seq1, add_special_tokens=True, max_length=128)
 
     bert_special_tokens = [bert_tokenizer.sep_token_id, bert_tokenizer.cls_token_id]
 
-#Encode_plus()
+Encode_plus()
 
     from transformers import glue_convert_examples_to_features
 
@@ -63,10 +63,12 @@ Training the model
 The beauty of tensorflow/keras lies here: using keras' fit method to fine-tune the model with a single line of code
 
 Fine-tuning BERT on MRPC
-    bert_history = bert_model.fit(bert_train_dataset, epochs=3, validation_data=bert_validation_dataset)
 
-#Evaluating the BERT model
-#Evaluating a model is as simple as it is to train it - using the evaluate method
+        bert_history = bert_model.fit(bert_train_dataset, epochs=3, validation_data=bert_validation_dataset)
+
+Evaluating the BERT model
+
+Evaluating a model is as simple as it is to train it - using the evaluate method
 
     bert_model.evaluate(bert_validation_dataset)
 
