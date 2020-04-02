@@ -5,8 +5,16 @@ This colab notebook will guide you through using the Transformers library to obt
 
 We will be using two different models as a means of comparison: Google's BERT and Facebook's RoBERTa. Both have the same architecture but have had different pre-training approached.
 
-import the TensorFlow modules
+import the TensorFlow modules, transformers
 
 import tensorflow as tf
 
-print(tf.__version__)
+!pip install transformers
+
+from transformers import (TFBertForSequenceClassification, 
+                          BertTokenizer,
+                          TFRobertaForSequenceClassification, 
+                          RobertaTokenizer)
+
+bert_model = TFBertForSequenceClassification.from_pretrained("bert-base-cased")
+bert_tokenizer = BertTokenizer.from_pretrained("bert-base-cased")
