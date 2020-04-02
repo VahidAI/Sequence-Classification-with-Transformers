@@ -2,6 +2,9 @@
 
 This article will guide you through using the Transformers library to obtain state-of-the-art results on the sequence classification task. It is attached to the following tutorial. We will be using Bert model as a means of comparison: Google's BERT.
 
+....................................Importing the Librarys and Datasets....................................
+
+
 Import the TensorFlow modules:
                
     import tensorflow as tf
@@ -25,6 +28,9 @@ Getting the dataset:
     train_dataset = data["train"]
 
     validation_dataset = data["validation"]
+    
+....................................Encoding the Datasets ....................................
+    
 
 Encoding sequences:
 
@@ -46,7 +52,7 @@ Encode_plus():
 
 The two BERT datasets are now ready to be used: the training dataset is shuffled and batch, while the validation dataset is only batched.
 
-....................................Training the model....................................
+....................................Training the Model....................................
 
 Before fine-tuning the model, we must define a few hyperparameters that will be used during the training such as the optimizer, the loss and the evaluation metric.
 
@@ -64,17 +70,8 @@ The beauty of tensorflow/keras lies here: using keras' fit method to fine-tune t
 
         bert_history = bert_model.fit(bert_train_dataset, epochs=3, validation_data=bert_validation_dataset)
 
+....................................Evaluating the Model....................................
+
 Evaluating the BERT model:
 
     bert_model.evaluate(bert_validation_dataset)
-
-
-
-
-
-
-
-
-
-
-
